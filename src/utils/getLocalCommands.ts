@@ -1,6 +1,7 @@
 import path from "path";
 import getAllFiles from "./getAllfiles";
-import add from "../commands/maths/add";
+import { PermissionFlags, PermissionsBitField } from "discord.js";
+import { TCommand } from "../types/command";
 
 export default function (exceptions = []) {
     let localCommands = [];
@@ -14,7 +15,7 @@ export default function (exceptions = []) {
         const commandFiles = getAllFiles(commandCategory);
 
         for (const commandFile of commandFiles) {
-            const commandObject: {default: { name: string, description: string, options: any[], deleted: Boolean }} = require(commandFile);
+            const commandObject: TCommand = require(commandFile);
 
             if (exceptions.includes(commandObject.default.name as never)) {
                 continue;

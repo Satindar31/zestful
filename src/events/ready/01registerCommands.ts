@@ -53,20 +53,15 @@ export default async function (client: Client) {
 
 				try {
 					console.log("Registering " + localCommand.name + " command.");
-
-					const command = await applicationCommands?.create({
+					await applicationCommands.create({
 						name,
 						description,
 						options,
 					});
 
-					if (command == null || undefined) {
-						throw new Error("Command is null");
-					}
-
 					console.log(`👍 Registered command "${name}."`);
 				} catch (error) {
-					console.log(`There was an error: ${error}`);
+					console.log(`There was an error. \n ${error}`);
 				}
 			}
 		}

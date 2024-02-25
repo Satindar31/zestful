@@ -9,18 +9,18 @@ import {
 
 export default {
 	name: "ban",
-	description: "Bans a member from the server",
+	description: "Will ban a member from the server",
 	// devOnly: boolean,
 	// testOnly: boolean,
 	options: [
 		{
-			name: "Target user",
+			name: "target-user",
 			description: "User to ban",
 			required: true,
 			type: ApplicationCommandOptionType.Mentionable,
 		},
 		{
-			name: "Reason",
+			name: "reason",
 			description: "Reason for ban",
 			required: false,
 			type: ApplicationCommandOptionType.String,
