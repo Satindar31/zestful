@@ -7,20 +7,20 @@ import {
 } from "discord.js";
 
 export default {
-	name: "ban",
+	name: "kick",
 	description: "Will ban a member from the server",
 	// devOnly: boolean,
 	// testOnly: boolean,
 	options: [
 		{
-			name: "target",
-			description: "User to ban",
+			name: "target-user",
+			description: "User to kick",
 			required: true,
 			type: ApplicationCommandOptionType.Mentionable,
 		},
 		{
 			name: "reason",
-			description: "Reason for ban",
+			description: "Reason for kicking member",
 			required: false,
 			type: ApplicationCommandOptionType.String,
 		},
@@ -28,12 +28,12 @@ export default {
 	permissions: [PermissionFlagsBits.BanMembers],
 	botPermissionsRequired: [PermissionFlagsBits.BanMembers],
 	callback: (client: Client, interaction: CommandInteraction) => {
-		ban(client, interaction);
+		kick(client, interaction);
 	},
 };
 
-function ban(client: Client, interaction: CommandInteraction) {
-	const targetUser = interaction.options.get("target")!;
+function kick(client: Client, interaction: CommandInteraction) {
+	const targetUser = interaction.options.get("target-user")!;
 	const reason = interaction.options.get("reason")!;
 
 	const member = interaction.guild?.members.cache.get(
@@ -48,41 +48,36 @@ function ban(client: Client, interaction: CommandInteraction) {
 		return;
 	}
 
-	if (!member.bannable) {
+	if (!member.kickable) {
 		interaction.reply({
-			content: "I cannot ban this user!",
+			content: "I cannot kick this user!",
 			ephemeral: true,
 		});
 		return;
 	}
 
-	member.ban({ reason: reason?.value?.toString() }).then(() => {
-		interaction.reply({
-			content: `Successfully banned ${member.user.tag}`,
-			ephemeral: true,
-		});
-
-		const banEmbed = new EmbedBuilder({
-			title: "Member Banned",
-			description: `**${member.user.tag}** has been banned from the server.`,
+	member.kick(reason.value?.toString()).then(() => {
+		const kickEmbed = new EmbedBuilder({
+			title: "Member Kicked",
+			description: `**${member.user.tag}** was kicked from the server.`,
 			color: 0xff0000,
+			timestamp: Date.now(),
 			fields: [
 				{
 					name: "Moderator",
-					value: `@${interaction.user.username}`,
-					inline: true,
+					value: `@${interaction.user.username})`,
 				},
 				{
 					name: "Reason",
-					value: reason?.value?.toString() || "No reason provided",
-					inline: true,
+					value: reason.value?.toString() || "No reason provided",
 				},
 			],
 		});
+		interaction.channel?.send({ embeds: [kickEmbed] });
 
-		interaction.channel?.send({
-			embeds: [banEmbed],
+		interaction.reply({
+			content: `Successfully kicked ${member.user.tag}!`,
+			ephemeral: true,
 		});
-		return;
 	});
 }
