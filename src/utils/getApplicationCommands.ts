@@ -1,16 +1,15 @@
 import { Client } from "discord.js";
 
-export default async function (client: Client, guildID: number) {
+export default async function (client: Client, guildID: string) {
 	let applicationCommands;
 
 	if (guildID) {
 		try {
-			const guild = await client.guilds.fetch("1129432438364459148");
+			const guild = await client.guilds.fetch(guildID);
+
 			applicationCommands = guild.commands;
 		} catch (err: any) {
-			throw new Error(err.name, {
-				cause: err.cause,
-			});
+			throw new Error(err)
 		}
 	} else {
 		applicationCommands = client.application?.commands;

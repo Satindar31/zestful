@@ -24,7 +24,7 @@ export default async function (client: Client, interaction: CommandInteraction) 
 		}
 
 		if (commandObject.testOnly == true) {
-			if (Number(interaction.guild?.id) !== testServerID) {
+			if (Number(interaction.guild?.id) !== Number(testServerID)) {
 				interaction.reply({
 					content: "You do not have permission to use this command!",
 					ephemeral: true,

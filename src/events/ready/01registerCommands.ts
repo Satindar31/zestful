@@ -6,7 +6,6 @@ import getApplicationCommands from "../../utils/getApplicationCommands";
 import getLocalCommands from "../../utils/getLocalCommands";
 
 export default async function (client: Client) {
-	console.log("🔁 Registering commands...");
 	try {
 		const localCommands = getLocalCommands();
 		const applicationCommands = await getApplicationCommands(
