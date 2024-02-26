@@ -16,7 +16,7 @@ export default {
 			name: "target",
 			description: "User to ban",
 			required: true,
-			type: ApplicationCommandOptionType.Mentionable,
+			type: ApplicationCommandOptionType.User,
 		},
 		{
 			name: "reason",
@@ -25,7 +25,7 @@ export default {
 			type: ApplicationCommandOptionType.String,
 		},
 	],
-	permissions: [PermissionFlagsBits.BanMembers],
+	permissionsRequired: [PermissionFlagsBits.BanMembers],
 	botPermissionsRequired: [PermissionFlagsBits.BanMembers],
 	callback: (client: Client, interaction: CommandInteraction) => {
 		ban(client, interaction);

@@ -16,7 +16,7 @@ export default {
 			name: "target-user",
 			description: "User to kick",
 			required: true,
-			type: ApplicationCommandOptionType.Mentionable,
+			type: ApplicationCommandOptionType.User,
 		},
 		{
 			name: "reason",
@@ -25,7 +25,7 @@ export default {
 			type: ApplicationCommandOptionType.String,
 		},
 	],
-	permissions: [PermissionFlagsBits.BanMembers],
+	permissionsRequired: [PermissionFlagsBits.BanMembers],
 	botPermissionsRequired: [PermissionFlagsBits.BanMembers],
 	callback: (client: Client, interaction: CommandInteraction) => {
 		kick(client, interaction);
@@ -79,5 +79,7 @@ function kick(client: Client, interaction: CommandInteraction) {
 			content: `Successfully kicked ${member.user.tag}!`,
 			ephemeral: true,
 		});
+
+		return
 	});
 }
