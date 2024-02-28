@@ -56,7 +56,33 @@ function kick(client: Client, interaction: CommandInteraction) {
 		return;
 	}
 
+	const kickedUserEmbed = new EmbedBuilder({
+		title: "Kicked from " + interaction.guild?.name,
+		description: "You were kicked for: " + (reason.value || "No reason provided"),
+		author: {
+			name: interaction.guild?.name!,
+			icon_url: interaction.guild?.iconURL() ?? interaction.client.user.displayAvatarURL()
+		},
+		color: 0xff0000,
+		footer: {
+			text: interaction.client.user.username,
+			icon_url: interaction.client.user.displayAvatarURL()
+		},
+		fields: [{
+			name: "Kicked by",
+			value: interaction.user.username
+		}, {
+			name: "Reason",
+			value: reason.value?.toString() ?? "No reason provided."
+		}]
+	})
+
+	member.dmChannel?.send({
+		embeds: [kickedUserEmbed]
+	})
 	member.kick(reason.value?.toString()).then(() => {
+
+		
 		const kickEmbed = new EmbedBuilder({
 			title: "Member Kicked",
 			description: `**${member.user.tag}** was kicked from the server.`,

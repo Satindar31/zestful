@@ -56,6 +56,37 @@ function ban(client: Client, interaction: CommandInteraction) {
 		return;
 	}
 
+	const bannedUserEmbed = new EmbedBuilder({
+		title: "Banned from " + interaction.guild?.name,
+		description:
+			"You were banned for: " + (reason.value || "No reason provided"),
+		author: {
+			name: interaction.guild?.name!,
+			icon_url:
+				interaction.guild?.iconURL() ??
+				interaction.client.user.displayAvatarURL(),
+		},
+		color: 0xff0000,
+		footer: {
+			text: interaction.client.user.username,
+			icon_url: interaction.client.user.displayAvatarURL(),
+		},
+		fields: [
+			{
+				name: "banned by",
+				value: interaction.user.username,
+			},
+			{
+				name: "Reason",
+				value: reason.value?.toString() ?? "No reason provided.",
+			},
+		],
+	});
+
+	member.dmChannel?.send({
+		embeds: [bannedUserEmbed],
+	});
+
 	member.ban({ reason: reason?.value?.toString() }).then(() => {
 		interaction.reply({
 			content: `Successfully banned ${member.user.tag}`,
