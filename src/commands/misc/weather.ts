@@ -101,7 +101,7 @@ export async function weather(interaction: CommandInteraction) {
 		);
 
 	interaction.editReply({ embeds: [embed] });
-	// https://youtu.be/u5_a-lQlv6A?list=PLpmb-7WxPhe0ZVpH9pxT5MtC4heqej8Es&t=160
+	return
 }
 /**
  *

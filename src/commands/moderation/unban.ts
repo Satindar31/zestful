@@ -83,5 +83,9 @@ function unban(client: Client, interaction: CommandInteraction) {
 
 				return;
 			});
+
+		return;
 	});
+
+	return;
 }
