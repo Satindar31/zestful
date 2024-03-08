@@ -10,7 +10,7 @@ export default {
 	description: "Sends a message containing all the commands",
 	options: [
 		{
-			name: "DMs",
+			name: "inform-user",
 			description:
 				"Determines if to send the message in your DMs or in the server.",
 			required: false,
