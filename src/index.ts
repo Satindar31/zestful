@@ -27,10 +27,5 @@ process.once("SIGTERM", async () => {
 	await client.destroy();
 	process.exit(0);
 });
-process.once("SIGKILL", async () => {
-	console.log("Shutting down bot");
-	await client.destroy();
-	process.exit(0);
-});
 
 client.login(process.env.BOT_TOKEN);
