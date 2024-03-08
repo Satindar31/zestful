@@ -17,12 +17,17 @@ eventHandlers(client);
 
 
 // Will stop bot on SIGINT or SIGTERM
-process.on("SIGINT", async () => {
+process.once("SIGINT", async () => {
 	console.log("Shutting down bot");
 	await client.destroy();
 	process.exit(0);
 });
-process.on("SIGTERM", async () => {
+process.once("SIGTERM", async () => {
+	console.log("Shutting down bot");
+	await client.destroy();
+	process.exit(0);
+});
+process.once("SIGKILL", async () => {
 	console.log("Shutting down bot");
 	await client.destroy();
 	process.exit(0);
