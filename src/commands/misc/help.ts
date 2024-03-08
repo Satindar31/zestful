@@ -58,9 +58,11 @@ function help(interaction: CommandInteraction) {
 		interaction.user.dmChannel?.send({ embeds: [helpEmbed] });
 
 		return;
+	} else {
+		interaction.reply({
+			embeds: [helpEmbed],
+		});
+		return;
 	}
 
-	interaction.reply({
-		embeds: [helpEmbed],
-	});
 }

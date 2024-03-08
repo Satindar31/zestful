@@ -17,4 +17,6 @@ function ping(client: Client, interaction: CommandInteraction) {
 			Date.now() - interaction.createdTimestamp
 		}ms. \n API Latency is ${Math.round(client.ws.ping)}ms.`
 	);
+
+	return
 }
