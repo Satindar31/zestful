@@ -10,7 +10,7 @@ import { TBaseCommand } from "../../types/command";
 export default {
 	name: "weather",
 	description: "Shows the weather of a city",
-	devOnly: true,
+	devOnly: false,
 	testOnly: false,
 	botPermissionsRequired: [],
 	deleted: false,
@@ -67,7 +67,7 @@ export async function weather(interaction: CommandInteraction) {
 	const fields: APIEmbedField[] = [
 		{
 			name: "Temprature",
-			value: (unit?.value == "C" ? tempC.toString() : tempF.toString()) ?? tempC.toString(),
+			value: (unit?.value == "F" ? (tempF.toString() + "C") : (tempC.toString() + "C")) ?? tempC.toString(),
 		},
 		{
 			name: "Humidity",

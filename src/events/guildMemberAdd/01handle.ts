@@ -6,7 +6,7 @@ import Sentry from "@sentry/node";
 
 export default async function (member: GuildMember) {
     try {
-        const _member = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 id: member.id,
             }
