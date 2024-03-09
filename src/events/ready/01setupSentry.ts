@@ -15,4 +15,5 @@ export default function (client: Client, interaction: CommandInteraction) {
 			nodeProfilingIntegration()
 		]
 	});
+	console.log("Sentry initialized");
 }
