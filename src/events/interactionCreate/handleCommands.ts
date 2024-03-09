@@ -7,6 +7,7 @@ export default async function (client: Client, interaction: CommandInteraction) 
 
 	const localCommands = getLocalCommands();
 
+
 	try {
 		const commandObject = localCommands.find(
 			(cmd) => cmd.name === interaction.commandName

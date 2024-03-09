@@ -5,16 +5,20 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^5.10.2",
+    "@sentry/cli": "^2.30.0",
+    "@sentry/node": "^7.106.0",
+    "@sentry/profiling-node": "^7.106.0",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "prisma": "^5.10.2"
   },
   "scripts": {
     "dev": "tsx watch src/",
-    "build": "tsc",
+    "build": "tsc && yarn sentry:sourcemaps",
     "start": "node .",
     "buildStuffs": "node src/utils/build.js",
-    "prod": "yarn buildStuffs && yarn build && yarn start"
+    "prod": "yarn buildStuffs && yarn build && yarn start",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org satindars-den --project neverdown-bot ./dist && sentry-cli sourcemaps upload --org satindars-den --project neverdown-bot ./dist"
   },
   "devDependencies": {
     "@types/node": "^20.11.20",

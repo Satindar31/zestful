@@ -1,7 +1,9 @@
 import { Client } from "discord.js";
 import getAllFIles from "../utils/getAllfiles";
 import path from "path";
+
 export default function (client: Client) {
+
 	const eventFolders = getAllFIles(path.join(__dirname, "..", "events"), true);
 	console.log(path.join(__dirname, "..", "events"));
 

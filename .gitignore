@@ -1,4 +1,13 @@
 # node
 node_modules
 
+# builds
+builds
+dist
+
+# ENVs
 .env
+
+
+# Sentry Config File
+.sentryclirc
