@@ -33,7 +33,7 @@ export default {
 				{
 					name: "Fahrenheit",
 					value: "F",
-				}
+				},
 			],
 			required: false,
 			type: ApplicationCommandOptionType.String,
@@ -48,8 +48,7 @@ export default {
 } as TBaseCommand;
 
 export async function weather(interaction: CommandInteraction) {
-
-	const unit = interaction.options.get("unit")
+	const unit = interaction.options.get("unit");
 
 	const city = interaction.options.get("city")!.value?.toString();
 
@@ -63,11 +62,13 @@ export async function weather(interaction: CommandInteraction) {
 	const tempC = Math.round(currentWeather.main.temp - 273.15);
 	const tempF = Math.round((tempK - 273.15) * 1.8 + 32);
 
-
 	const fields: APIEmbedField[] = [
 		{
 			name: "Temprature",
-			value: (unit?.value == "F" ? (tempF.toString() + "C") : (tempC.toString() + "C")) ?? tempC.toString(),
+			value:
+				(unit?.value == "F"
+					? tempF.toString() + "ºF"
+					: tempC.toString() + "ºC") ?? tempC.toString() + "ºC",
 		},
 		{
 			name: "Humidity",
@@ -92,6 +93,8 @@ export async function weather(interaction: CommandInteraction) {
 		.setColor(0xfff)
 		.setFooter({
 			text: "Powered by OpenWeatherMap",
+			iconURL:
+				"https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png",
 		})
 		.setTitle("Weather")
 		.setThumbnail(
@@ -101,7 +104,7 @@ export async function weather(interaction: CommandInteraction) {
 		);
 
 	interaction.editReply({ embeds: [embed] });
-	return
+	return;
 }
 /**
  *

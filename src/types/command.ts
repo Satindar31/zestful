@@ -4,7 +4,7 @@ import {
 	CommandInteraction,
 } from "discord.js";
 
-import type { PermissionFlagsBits } from "discord.js";
+import type { PermissionFlagsBits, PermissionsBitField } from "discord.js";
 
 /**
  * @deprecated Use TBaseCommand instead
@@ -18,8 +18,8 @@ type TCommand = {
 		options: any[];
 		deleted: boolean;
 		devOnly: boolean;
-		permissionsRequired: typeof PermissionFlagsBits[];
-		botPermissionsRequired: typeof PermissionFlagsBits[];
+		permissionsRequired: PermissionsBitField[];
+		botPermissionsRequired: PermissionsBitField[];
 		callback: (client: Client, interaction: CommandInteraction) => void;
 	};
 };

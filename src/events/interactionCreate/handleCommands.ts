@@ -37,16 +37,16 @@ export default async function (client: Client, interaction: CommandInteraction) 
 
         const memberPermissions = interaction.member.permissions as Readonly<PermissionsBitField>;
 
-        if(commandObject.permissionsRequired?.length) {
-            for(const permission of commandObject.permissionsRequired) {
-                if(!memberPermissions.has(permission)) {
-                    interaction.reply({
-                        content: "You do not have permission to use this command!", ephemeral: true
-                    });
-                    return;
-                }
-            }
-        }
+if(commandObject.permissionsRequired?.length) {
+	for(const permission of commandObject.permissionsRequired) {
+		if(!memberPermissions.has(permission)) {
+			interaction.reply({
+				content: "You do not have permission to use this command!", ephemeral: true
+			});
+			return;
+		}
+	}
+}
 
         if(commandObject.botPermissionsRequired?.length) {
             for(const permission of commandObject.botPermissionsRequired) {
